@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   def index
     logger.debug "[ArticlesController] index method...."
     @articles = Article.all
@@ -14,9 +13,8 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       logger.debug "[ArticlesController] save is not successful."
-      render 'new'
+      render "new"
     end
-
   end
 
   def show
@@ -30,7 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])    
+    @article = Article.find(params[:id])
   end
 
   def update
@@ -39,7 +37,7 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -47,12 +45,11 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
 
-    redirect_to articles_path    
+    redirect_to articles_path
   end
 
   private
   def article_params
     params.require(:article).permit(:title, :body)
   end
-  
 end
